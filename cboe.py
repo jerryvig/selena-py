@@ -22,5 +22,9 @@ def get_real_time_quote(ticker):
 	quoteObject = {'ticker': ticker, 'quote': quotePartsII[0]}
 	return quoteObject
 
+def parse_csv_file():
+	print 'parsing the CSV file here.'
+
 #get_csv_file('AAPL')
-print get_real_time_quote('GOOG')
+#print get_real_time_quote('GOOG')
+parse_csv_file()
