@@ -1,12 +1,15 @@
-import time
-
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions
 
 def loadPersonalizedDeals(driver):
   driver.get('http://www.safeway.com/ShopStores/Justforu-Coupons.page#/offerTypes/PD')
-  driver.find_element_by_xpath('//a[@href="#/offerTypes/PD"]')
-  driver.quit()
+  try:
+    driver.find_element_by_xpath('//a[@href="#/offerTypes/PD"]')
+    # Continue the logic here.
+    driver.quit()
+  except:
+    print 'GIVING UP'
+    driver.quit()
 
 def main():
   USER_ID = 'agentq314@yahoo.com'
@@ -21,8 +24,6 @@ def main():
   contrasena.send_keys(CONTRASENA)
   signIn = driver.find_element_by_id('SignInBtn')
   signIn.send_keys('\n')
-
-  #time.sleep(5)
 
   # Sleep and then proceed with the checks.
   # Do another wait here.
