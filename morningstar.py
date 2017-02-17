@@ -33,4 +33,5 @@ class MorningstarCollector:
       print response.read()
       time.sleep(2)
 
-MorningstarCollector.main()
+if __name__ == '__main__':
+  MorningstarCollector.main()

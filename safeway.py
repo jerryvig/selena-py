@@ -1,3 +1,4 @@
+from pyglib import app
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions
 
@@ -11,7 +12,7 @@ def loadPersonalizedDeals(driver):
     print 'GIVING UP'
     driver.quit()
 
-def main():
+def main(unused_argv):
   USER_ID = 'agentq314@yahoo.com'
   CONTRASENA = 'overthere'
   
@@ -33,4 +34,5 @@ def main():
   except:
     loadPersonalizedDeals(driver)
 
-main()
+if __name__ == '__main__':
+  app.run()
