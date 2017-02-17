@@ -1,5 +1,8 @@
 from pyglib import app
+from pyglib import gflags
 from selenium import webdriver
+
+FLAGS = gflags.FLAGS
 
 
 def get_browser(name):
