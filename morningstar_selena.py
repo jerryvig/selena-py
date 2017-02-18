@@ -4,7 +4,8 @@ from selenium import webdriver
 
 FLAGS = gflags.FLAGS
 
-gflags.DEFINE_string('browser_driver', 'Chrome', 'The name of the browser driver to use, "Chrome", "Firefox", "PhantomJS", etc.')
+gflags.DEFINE_string('browser_driver', 'Chrome',
+'The name of the browser driver to use, "Chrome", "Firefox", "PhantomJS", etc.')
 
 
 def get_browser(name):
