@@ -2,10 +2,12 @@ from pyglib import app
 from pyglib import log
 from selenium import webdriver
 
+IMPLICIT_WAIT = 9
 USER_ID = 'agentq314@yahoo.com'
 CONTRASENA = 'overthere'
 LOGIN_PAGE_URL = 'https://www.safeway.com/CMS/account/login/'
 PERSONALIZED_DEALS_PAGE_URL = 'http://www.safeway.com/ShopStores/Justforu-Coupons.page#/offerTypes/PD'
+
 
 def get_driver(name):
   if name == 'Chrome':
@@ -26,7 +28,7 @@ def load_personalized(driver):
 def main(unused_argv):
   driver = get_driver('Chrome')
   try:
-    driver.implicitly_wait(8)
+    driver.implicitly_wait(IMPLICIT_WAIT)
     driver.get(LOGIN_PAGE_URL)
     user_id_input = driver.find_element_by_id('input-email')
     user_id_input.send_keys(USER_ID)
@@ -34,9 +36,15 @@ def main(unused_argv):
     contrasena.send_keys(CONTRASENA)
     sign_in_boton = driver.find_element_by_id('create-account-btn')
     sign_in_boton.send_keys('\n')
-    sign_in_boton.click()
-    
-    load_personalized(driver)
+
+    j4u_link = driver.find_element_by_xpath(
+        '//a[@href="/ShopStores/Offers-Landing-IMG.page"]')
+    if j4u_link:
+      load_personalized(driver)
+    else:
+      # HERE IS WHERE YOU MIGHT IMPLEMENT RETRY LOGIC.
+      pass
+
   finally:
     driver.close()
 
