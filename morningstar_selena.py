@@ -4,6 +4,8 @@ from selenium import webdriver
 
 FLAGS = gflags.FLAGS
 
+gflags.DEFINE_string('browser_driver', 'Chrome', 'The name of the browser driver to use, "Chrome", "Firefox", "PhantomJS", etc.')
+
 
 def get_browser(name):
   if name == 'Chrome':
@@ -17,8 +19,9 @@ def get_browser(name):
 def main(unused_argv):
   ticker_list = ['AAPL', 'GOOGL', 'MSFT', 'FB', 'AMZN']
 
+  browser = get_browser(FLAGS.browser_driver)
+
   try:
-    browser = get_browser('Chrome')
     browser.get('http://financials.morningstar.com/income-statement/is.html?t=%s&region=USA' % ticker_list[3])
     body_element = browser.find_element_by_tag_name('body')
     revenue_row_elements = body_element.find_elements_by_xpath('//div[@id="data_i1"]')
