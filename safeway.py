@@ -25,6 +25,16 @@ def load_personalized(driver):
   # Continue the logic here...
 
 
+def get_j4u_link(driver):
+  j4u_link = None
+  for tries in range(3):
+    j4u_link = driver.find_element_by_xpath(
+        '//a[@href="/ShopStores/Offers-Landing-IMG.page"]')
+    if j4u_link:
+      return j4u_link
+  return j4u_link
+
+
 def main(unused_argv):
   driver = get_driver('Chrome')
   try:
@@ -37,13 +47,9 @@ def main(unused_argv):
     sign_in_boton = driver.find_element_by_id('create-account-btn')
     sign_in_boton.send_keys('\n')
 
-    j4u_link = driver.find_element_by_xpath(
-        '//a[@href="/ShopStores/Offers-Landing-IMG.page"]')
+    j4u_link = get_j4u_link(driver)
     if j4u_link:
       load_personalized(driver)
-    else:
-      # HERE IS WHERE YOU MIGHT IMPLEMENT RETRY LOGIC.
-      pass
 
   finally:
     driver.close()
