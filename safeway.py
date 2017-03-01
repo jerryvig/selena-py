@@ -2,7 +2,6 @@ import time
 from pyglib import app
 from pyglib import log
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 
 IMPLICIT_WAIT = 9
 USER_ID = 'agentq314@yahoo.com'
@@ -24,21 +23,28 @@ def get_driver(name):
 
 def load_personalized(driver):
   driver.get(PERSONALIZED_DEALS_PAGE_URL)
-  elements = driver.find_element_by_xpath('//a[@href="#/offerTypes/PD"]')
-  log.info('elements = %s', elements)
-  make_my_store_elements = driver.find_elements_by_xpath('//button[text()="Make this My Store"]')
+  elements = driver.find_elements_by_xpath('//a[@href="#/offerTypes/PD"]')
+  log.info('PD link elements = %s', elements)
+  make_my_store_elements = driver.find_elements_by_xpath(
+      '//button[text()="Make this My Store"]')
   for button in make_my_store_elements:
     button.click()
-  log.info('Sleeping %d seconds...', IMPLICIT_WAIT)
-  # Continue the logic here...
+    log.info('Sleeping %d seconds...', IMPLICIT_WAIT)
+    time.sleep(IMPLICIT_WAIT)
+    break
+
+  add_buttons = driver.find_elements_by_xpath('//span[text()="Add"]')
+  log.info('Found %d buttons on personalized deals page.', len(add_buttons))
+  for button in add_buttons:
+    button.click()
 
 
 def load_coupons(driver):
   driver.get(COUPONS_PAGE_URL)
   elements = driver.find_element_by_xpath('//a[@href="#/offerTypes/CC"]')
-  log.info('elements = %s', elements)
+  log.info('CC link elements = %s', elements)
   add_buttons = driver.find_elements_by_xpath('//span[text()="Add"]')
-  log.info('Found %d buttons on page.', len(add_buttons))
+  log.info('Found %d buttons on coupons page.', len(add_buttons))
   for button in add_buttons:
     button.click()
 
