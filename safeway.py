@@ -1,7 +1,15 @@
 import time
 from pyglib import app
+from pyglib import gflags
 from pyglib import log
 from selenium import webdriver
+
+
+FLAGS = gflags.FLAGS
+
+gflags.DEFINE_string(
+    'browser_driver', 'Chrome', 'The name of the browser driver to use, '
+    '"Chrome","Firefox", "PhantomJS", etc.')
 
 IMPLICIT_WAIT = 9
 USER_ID = 'agentq314@yahoo.com'
@@ -60,7 +68,7 @@ def get_j4u_link(driver):
 
 
 def main(unused_argv):
-  driver = get_driver('Chrome')
+  driver = get_driver(FLAGS.browser_driver)
   try:
     driver.implicitly_wait(IMPLICIT_WAIT)
     driver.get(LOGIN_PAGE_URL)
