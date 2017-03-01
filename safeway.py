@@ -7,6 +7,8 @@ USER_ID = 'agentq314@yahoo.com'
 CONTRASENA = 'overthere'
 LOGIN_PAGE_URL = 'https://www.safeway.com/CMS/account/login/'
 PERSONALIZED_DEALS_PAGE_URL = 'http://www.safeway.com/ShopStores/Justforu-Coupons.page#/offerTypes/PD'
+COUPONS_PAGE_URL = 'http://www.safeway.com/ShopStores/Justforu-Coupons.page#/offerTypes/CC'
+J4U_TRIES = 3
 
 
 def get_driver(name):
@@ -25,9 +27,15 @@ def load_personalized(driver):
   # Continue the logic here...
 
 
+def load_coupons(driver):
+  driver.get(COUPONS_PAGE_URL)
+  elements = driver.find_element_by_xpath('//a[@href="#/offerTypes/CC"]')
+  log.info('elements = %s', elements)
+
+
 def get_j4u_link(driver):
   j4u_link = None
-  for tries in range(3):
+  for i in xrange(J4U_TRIES):
     j4u_link = driver.find_element_by_xpath(
         '//a[@href="/ShopStores/Offers-Landing-IMG.page"]')
     if j4u_link:
@@ -50,6 +58,7 @@ def main(unused_argv):
     j4u_link = get_j4u_link(driver)
     if j4u_link:
       load_personalized(driver)
+      load_coupons(driver)
 
   finally:
     driver.close()
