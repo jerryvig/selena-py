@@ -20,6 +20,11 @@ COUPONS_PAGE_URL = 'http://www.safeway.com/ShopStores/Justforu-Coupons.page#/off
 J4U_TRIES = 3
 
 
+class Error(Exception):
+  """Base class for exceptions in this module."""
+  pass
+
+
 def get_driver(name):
   if name == 'Chrome':
     return webdriver.Chrome()
@@ -85,6 +90,8 @@ def main(unused_argv):
       time.sleep(IMPLICIT_WAIT)
       log.info('Sleeping %d seconds...', IMPLICIT_WAIT)
       load_coupons(driver)
+    else:
+      raise Error('Just4U link was never found.')
 
   finally:
     driver.close()
