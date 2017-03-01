@@ -4,8 +4,15 @@ from selenium import webdriver
 
 FLAGS = gflags.FLAGS
 
-gflags.DEFINE_string('browser_driver', 'Chrome',
-'The name of the browser driver to use, "Chrome", "Firefox", "PhantomJS", etc.')
+gflags.DEFINE_string(
+    'browser_driver', 'Chrome',
+    'The name of the browser driver to use, "Chrome", "Firefox", '
+    '"PhantomJS", etc.')
+
+
+class Error(Exception):
+  """Base class for exceptions in this module."""
+  pass
 
 
 def get_browser(name):
@@ -21,6 +28,9 @@ def main(unused_argv):
   ticker_list = ['AAPL', 'GOOGL', 'MSFT', 'FB', 'AMZN']
 
   browser = get_browser(FLAGS.browser_driver)
+  if not browser:
+    raise Error(
+        'Failed to create browser instance with flag %s' % FLAGS.browser_driver)
 
   try:
     browser.get('http://financials.morningstar.com/income-statement/is.html?t=%s&region=USA' % ticker_list[3])
