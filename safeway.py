@@ -1,6 +1,8 @@
+import time
 from pyglib import app
 from pyglib import log
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
 
 IMPLICIT_WAIT = 9
 USER_ID = 'agentq314@yahoo.com'
@@ -24,6 +26,10 @@ def load_personalized(driver):
   driver.get(PERSONALIZED_DEALS_PAGE_URL)
   elements = driver.find_element_by_xpath('//a[@href="#/offerTypes/PD"]')
   log.info('elements = %s', elements)
+  make_my_store_elements = driver.find_elements_by_xpath('//button[text()="Make this My Store"]')
+  for button in make_my_store_elements:
+    button.click()
+  log.info('Sleeping %d seconds...', IMPLICIT_WAIT)
   # Continue the logic here...
 
 
@@ -31,6 +37,10 @@ def load_coupons(driver):
   driver.get(COUPONS_PAGE_URL)
   elements = driver.find_element_by_xpath('//a[@href="#/offerTypes/CC"]')
   log.info('elements = %s', elements)
+  add_buttons = driver.find_elements_by_xpath('//span[text()="Add"]')
+  log.info('Found %d buttons on page.', len(add_buttons))
+  for button in add_buttons:
+    button.click()
 
 
 def get_j4u_link(driver):
@@ -58,6 +68,8 @@ def main(unused_argv):
     j4u_link = get_j4u_link(driver)
     if j4u_link:
       load_personalized(driver)
+      time.sleep(IMPLICIT_WAIT)
+      log.info('Sleeping %d seconds...', IMPLICIT_WAIT)
       load_coupons(driver)
 
   finally:
