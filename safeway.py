@@ -74,6 +74,10 @@ def get_j4u_link(driver):
 
 def main(unused_argv):
   driver = get_driver(FLAGS.browser_driver)
+  if not driver:
+    raise Error(
+        'Failed to create driver instance with flag %s' % FLAGS.browser_driver)
+
   try:
     driver.implicitly_wait(IMPLICIT_WAIT)
     driver.get(LOGIN_PAGE_URL)
