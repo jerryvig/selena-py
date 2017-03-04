@@ -25,7 +25,7 @@ def get_browser(name):
 
 
 def main(unused_argv):
-  ticker_list = ['AAPL', 'GOOGL', 'MSFT', 'FB', 'AMZN']
+  ticker_list = ['AAPL', 'GOOGL', 'MSFT', 'FB', 'AMZN', 'NFLX', 'TSLA']
 
   browser = get_browser(FLAGS.browser_driver)
   if not browser:
@@ -42,6 +42,8 @@ def main(unused_argv):
       y2_element = revenue_row.find_element_by_id('Y_2')
       y3_element = revenue_row.find_element_by_id('Y_3')
       y4_element = revenue_row.find_element_by_id('Y_4')
+      y5_element = revenue_row.find_element_by_id('Y_5')
+      y6_element = revenue_row.find_element_by_id('Y_6')
       if y1_element:
         print 'year one raw value = ' + str(y1_element.get_attribute('rawvalue'))
       if y2_element:
@@ -50,6 +52,10 @@ def main(unused_argv):
         print 'year three raw val = ' + str(y3_element.get_attribute('rawvalue'))
       if y4_element:
         print 'year four raw val = ' + str(y4_element.get_attribute('rawvalue'))
+      if y5_element:
+        print 'year five raw val = ' + str(y5_element.get_attribute('rawvalue'))
+      if y6_element:
+        print 'year six raw val = ' + str(y6_element.get_attribute('rawvalue'))
   finally:
     browser.close()
     quit()
