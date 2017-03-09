@@ -48,6 +48,7 @@ def load_personalized(driver):
 
   add_buttons = driver.find_elements_by_xpath('//span[text()="Add"]')
   log.info('Found %d buttons on personalized deals page.', len(add_buttons))
+  # Would like to log what items were added.
   for button in add_buttons:
     button.click()
 
@@ -58,6 +59,7 @@ def load_coupons(driver):
   log.info('CC link elements = %s', elements)
   add_buttons = driver.find_elements_by_xpath('//span[text()="Add"]')
   log.info('Found %d buttons on coupons page.', len(add_buttons))
+  # Would like to log what items were added.
   for button in add_buttons:
     button.click()
 
