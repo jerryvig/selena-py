@@ -26,7 +26,7 @@ def get_browser(name):
 
 
 def main(unused_argv):
-  tickers = ('AAPL', 'GOOGL', 'MSFT', 'FB', 'AMZN', 'NFLX', 'TSLA', 'TWTR', 'BABA')
+  tickers = ('AAPL', 'GOOGL', 'MSFT', 'FB', 'AMZN', 'NFLX', 'TSLA', 'TWTR', 'BABA', 'BIDU', 'PYPL', 'SPLK', 'SQ')
 
   browser = get_browser(FLAGS.browser_driver)
   if not browser:
@@ -47,27 +47,21 @@ def main(unused_argv):
         y5_element = revenue_row.find_element_by_id('Y_5')
         y6_element = revenue_row.find_element_by_id('Y_6')
         if y1_element:
-          print 'year one raw value = ' + str(y1_element.get_attribute('rawvalue'))
           y1_raw_val = y1_element.get_attribute('rawvalue')
         if y2_element:
-          print 'year two raw value = ' + str(y2_element.get_attribute('rawvalue'))
           y2_raw_val = y2_element.get_attribute('rawvalue')
         if y3_element:
-          print 'year three raw val = ' + str(y3_element.get_attribute('rawvalue'))
           y3_raw_val = y3_element.get_attribute('rawvalue')
         if y4_element:
-          print 'year four raw val = ' + str(y4_element.get_attribute('rawvalue'))
           y4_raw_val = y4_element.get_attribute('rawvalue')
         if y5_element:
-          print 'year five raw val = ' + str(y5_element.get_attribute('rawvalue'))
           y5_raw_val = y5_element.get_attribute('rawvalue')
         if y6_element:
-          print 'year six raw val = ' + str(y6_element.get_attribute('rawvalue'))
           y6_raw_val = y6_element.get_attribute('rawvalue')
 
-        print '"%s","%s","%s"' % (y1_raw_val, y2_raw_val, y3_raw_val)
+        print '"%s","%s","%s","%s","%s","%s","%s"' % (symbol, y1_raw_val, y2_raw_val, y3_raw_val, y4_raw_val, y5_raw_val, y6_raw_val)
 
-      time.sleep(1)
+      time.sleep(1.25)
   finally:
     browser.close()
     quit()
