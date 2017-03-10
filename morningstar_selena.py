@@ -46,18 +46,12 @@ def main(unused_argv):
         y4_element = revenue_row.find_element_by_id('Y_4')
         y5_element = revenue_row.find_element_by_id('Y_5')
         y6_element = revenue_row.find_element_by_id('Y_6')
-        if y1_element:
-          y1_raw_val = y1_element.get_attribute('rawvalue')
-        if y2_element:
-          y2_raw_val = y2_element.get_attribute('rawvalue')
-        if y3_element:
-          y3_raw_val = y3_element.get_attribute('rawvalue')
-        if y4_element:
-          y4_raw_val = y4_element.get_attribute('rawvalue')
-        if y5_element:
-          y5_raw_val = y5_element.get_attribute('rawvalue')
-        if y6_element:
-          y6_raw_val = y6_element.get_attribute('rawvalue')
+        y1_raw_val = y1_element.get_attribute('rawvalue') if y1_element else 0
+        y2_raw_val = y2_element.get_attribute('rawvalue') if y2_element else 0
+        y3_raw_val = y3_element.get_attribute('rawvalue') if y3_element else 0
+        y4_raw_val = y4_element.get_attribute('rawvalue') if y4_element else 0
+        y5_raw_val = y5_element.get_attribute('rawvalue') if y5_element else 0
+        y6_raw_val = y6_element.get_attribute('rawvalue') if y6_element else 0
 
         print '"%s","%s","%s","%s","%s","%s","%s"' % (symbol, y1_raw_val, y2_raw_val, y3_raw_val, y4_raw_val, y5_raw_val, y6_raw_val)
 
