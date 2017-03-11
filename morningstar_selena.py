@@ -44,6 +44,7 @@ def main(unused_argv):
 
   try:
     for symbol in tickers:
+      log.info('Fetching for ticket %s.', symbol)
       browser.get(MORNINGSTAR_BASE_URL % symbol)
       body_element = browser.find_element_by_tag_name('body')
       time.sleep(1.0)
