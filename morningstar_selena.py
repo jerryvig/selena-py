@@ -17,12 +17,11 @@ class Error(Exception):
 
 
 def get_browser(name):
-  if name == 'Chrome':
-    return webdriver.Chrome()
-  elif name == 'Firefox':
-    return webdriver.Firefox()
-  elif name == 'PhantomJS':
-    return webdriver.PhantomJS()
+  return {
+    'Chrome': lambda: webdriver.Chrome(),
+    'Firefox': lambda: webdriver.Firefox(),
+    'PhantomJS': lambda: webdriver.PhantomJS(),
+  }[name]()
 
 
 def main(unused_argv):
